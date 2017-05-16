@@ -2,7 +2,8 @@ import logging.config
 
 from flask import Flask, Blueprint
 from translate_api import settings
-from translate_api.api.translation.endpoints.translation import ns as translate_namespace
+from translate_api.api.translation.endpoints.translation import ns as text_translation_namespace
+from translate_api.api.translation.endpoints.detection import ns as text_detection_namespace
 from translate_api.api.restplus import api
 
 app = Flask(__name__)
@@ -23,7 +24,12 @@ def initialize_app(flask_app):
 
     blueprint = Blueprint('api', __name__, url_prefix='/api')
     api.init_app(blueprint)
-    api.add_namespace(translate_namespace)
+
+    # ADD ENDPOINTS
+    api.add_namespace(text_translation_namespace)
+    api.add_namespace(text_detection_namespace)
+    # END ENDPOINTS
+
     flask_app.register_blueprint(blueprint)
 
 

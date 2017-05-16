@@ -4,5 +4,7 @@
  - http://localhost:5000/api/
  - http://localhost:5000/api/swagger.json
  
-##API Methods
- - [POST] http://localhost:5000/api/translate/
+## API Methods
+
+ - [POST] http://localhost:5000/text/detect/
+ - [POST] http://localhost:5000/text/translate/

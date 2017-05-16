@@ -2,6 +2,10 @@ from flask_restplus import fields
 
 from translate_api.api.restplus import api
 
+detect_text_request = api.model('Detect language from text', {
+    'text': fields.String(description='Text to detect'),
+})
+
 translated_text_request = api.model('Translate text', {
     'from_language': fields.String(description='Translate to'),
     'to_language': fields.String(description='Translate to'),
