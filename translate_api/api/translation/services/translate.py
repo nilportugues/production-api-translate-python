@@ -28,8 +28,8 @@ class TranslationService:
 
         # Read data
         from_language = dto.get(FIELD_FROM_LANGUAGE, 'auto')
-        to_language = dto.get(FIELD_TO_LANGUAGE)
-        text = dto.get(FIELD_TEXT)
+        to_language = dto.get(FIELD_TO_LANGUAGE, "")
+        text = dto.get(FIELD_TEXT, "")
 
         # See https://pypi.python.org/pypi/googletrans/2.0.0
         # has bulk translations etc etc.
@@ -47,13 +47,13 @@ class TranslationService:
         if not FIELD_TO_LANGUAGE in dto:
             errors[FIELD_TO_LANGUAGE] = ERROR_FIELD_TO_LANGUAGE
 
-        if not self.is_valid_language(dto.get(FIELD_TO_LANGUAGE)):
+        if not self.is_valid_language(dto.get(FIELD_TO_LANGUAGE, "")):
             errors[FIELD_TO_LANGUAGE] = ERROR_FIELD_TO_LANGUAGE_NOT_SUPPORTED \
-                .replace('{language}', dto.get(FIELD_TO_LANGUAGE))
+                .replace('{language}', dto.get(FIELD_TO_LANGUAGE, ""))
 
-        if not self.is_valid_language(dto.get(FIELD_FROM_LANGUAGE)):
+        if not self.is_valid_language(dto.get(FIELD_FROM_LANGUAGE, "")):
             errors[FIELD_FROM_LANGUAGE] = ERROR_FIELD_FROM_LANGUAGE_NOT_SUPPORTED \
-                .replace('{language}', dto.get(FIELD_FROM_LANGUAGE))
+                .replace('{language}', dto.get(FIELD_FROM_LANGUAGE, ""))
 
         if not FIELD_TEXT in dto:
             errors[FIELD_TEXT] = ERROR_FIELD_TEXT
