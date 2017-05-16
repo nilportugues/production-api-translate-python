@@ -47,13 +47,15 @@ class TranslationService:
         if not FIELD_TO_LANGUAGE in dto:
             errors[FIELD_TO_LANGUAGE] = ERROR_FIELD_TO_LANGUAGE
 
-        if not self.is_valid_language(dto.get(FIELD_TO_LANGUAGE, "")):
+        to_language = dto.get(FIELD_TO_LANGUAGE, "")
+        if not self.is_valid_language(to_language):
             errors[FIELD_TO_LANGUAGE] = ERROR_FIELD_TO_LANGUAGE_NOT_SUPPORTED \
-                .replace('{language}', dto.get(FIELD_TO_LANGUAGE, ""))
+                .replace('{language}', to_language)
 
-        if not self.is_valid_language(dto.get(FIELD_FROM_LANGUAGE, "")):
+        from_language = dto.get(FIELD_FROM_LANGUAGE, "")
+        if not self.is_valid_language(from_language) and not 'auto' == from_language:
             errors[FIELD_FROM_LANGUAGE] = ERROR_FIELD_FROM_LANGUAGE_NOT_SUPPORTED \
-                .replace('{language}', dto.get(FIELD_FROM_LANGUAGE, ""))
+                .replace('{language}', from_language)
 
         if not FIELD_TEXT in dto:
             errors[FIELD_TEXT] = ERROR_FIELD_TEXT
