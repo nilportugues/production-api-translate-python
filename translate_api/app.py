@@ -1,9 +1,9 @@
 import logging.config
 
 from flask import Flask, Blueprint
-from rest_api_demo import settings
-from rest_api_demo.api.translation.endpoints.translation import ns as translate_namespace
-from rest_api_demo.api.restplus import api
+from translate_api import settings
+from translate_api.api.translation.endpoints.translation import ns as translate_namespace
+from translate_api.api.restplus import api
 
 app = Flask(__name__)
 logging.config.fileConfig('logging.conf')

@@ -1,7 +1,7 @@
 import logging
 
 from flask_restplus import Api
-from rest_api_demo import settings
+from translate_api import settings
 
 log = logging.getLogger(__name__)
 api = Api(version='1.0', title='Translation API')
