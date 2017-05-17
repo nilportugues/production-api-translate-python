@@ -12,3 +12,6 @@
 ## Documentation
  
 - http://flask-restplus.readthedocs.io/en/stable/swagger.html
+
+## Dockerize it:
+- https://github.com/juanjbrown/flask-nginx-gunicorn-docker-sample
