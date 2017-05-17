@@ -10,6 +10,7 @@ FIELD_FROM_LANGUAGE = 'from_language'
 FIELD_TO_LANGUAGE = 'to_language'
 
 ERROR_FIELD_TO_LANGUAGE = 'Missing `to_language` field in the request\'s body.'
+ERROR_FIELD_FROM_LANGUAGE = 'Missing `from_language` field in the request\'s body.'
 ERROR_FIELD_TEXT = 'Missing `text` field in request\'s body.'
 ERROR_FIELD_TO_LANGUAGE_NOT_SUPPORTED = 'Provided `to_language` value `{language}` is not supported.'
 ERROR_FIELD_FROM_LANGUAGE_NOT_SUPPORTED = 'Provided `from_language` value `{language}` is not supported.'
@@ -44,25 +45,29 @@ class TranslationService:
     def _validate_dto(self, dto):
         errors = {}
 
-        if not FIELD_TO_LANGUAGE in dto:
+        if dto.get(FIELD_TO_LANGUAGE, None) is None:
             errors[FIELD_TO_LANGUAGE] = ERROR_FIELD_TO_LANGUAGE
+        else:
+            to_language = dto.get(FIELD_TO_LANGUAGE)
+            if not self._is_valid_language(to_language):
+                errors[FIELD_TO_LANGUAGE] = ERROR_FIELD_TO_LANGUAGE_NOT_SUPPORTED \
+                    .replace('{language}', to_language)
 
-        to_language = dto.get(FIELD_TO_LANGUAGE, "")
-        if not self.is_valid_language(to_language):
-            errors[FIELD_TO_LANGUAGE] = ERROR_FIELD_TO_LANGUAGE_NOT_SUPPORTED \
-                .replace('{language}', to_language)
-
-        from_language = dto.get(FIELD_FROM_LANGUAGE, "")
-        if not self.is_valid_language(from_language) and not 'auto' == from_language:
-            errors[FIELD_FROM_LANGUAGE] = ERROR_FIELD_FROM_LANGUAGE_NOT_SUPPORTED \
-                .replace('{language}', from_language)
+        if dto.get(FIELD_FROM_LANGUAGE, None) is None:
+            errors[FIELD_FROM_LANGUAGE] = ERROR_FIELD_FROM_LANGUAGE
+        else:
+            from_language = dto.get(FIELD_FROM_LANGUAGE)
+            if not self._is_valid_language(from_language) and not 'auto' == from_language:
+                errors[FIELD_FROM_LANGUAGE] = ERROR_FIELD_FROM_LANGUAGE_NOT_SUPPORTED \
+                    .replace('{language}', from_language)
 
         if not FIELD_TEXT in dto:
             errors[FIELD_TEXT] = ERROR_FIELD_TEXT
 
         return errors
 
-    def is_valid_language(self, language):
+    @staticmethod
+    def _is_valid_language(language):
 
         if language in ALLOWED_LANGUAGES:
             return True

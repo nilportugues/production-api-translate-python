@@ -6,6 +6,7 @@ from flask_restplus import Swagger
 from translate_api import settings
 from translate_api.api.translation.endpoints.translation import ns as text_translation_namespace
 from translate_api.api.translation.endpoints.detection import ns as text_detection_namespace
+from translate_api.api.translation.endpoints.languages import ns as languages_namespace
 from translate_api.api.restplus import api
 
 app = Flask(__name__)
@@ -14,13 +15,15 @@ logging.config.fileConfig('logging.conf')
 log = logging.getLogger(__name__)
 
 
+
 def configure_app(flask_app):
     flask_app.config['SERVER_NAME'] = settings.FLASK_SERVER_NAME
     flask_app.config['SWAGGER_UI_DOC_EXPANSION'] = settings.RESTPLUS_SWAGGER_UI_DOC_EXPANSION
     flask_app.config['RESTPLUS_VALIDATE'] = settings.RESTPLUS_VALIDATE
     flask_app.config['RESTPLUS_MASK_SWAGGER'] = settings.RESTPLUS_MASK_SWAGGER
     flask_app.config['ERROR_404_HELP'] = settings.RESTPLUS_ERROR_404_HELP
-
+    flask_app.config['SWAGGER_UI_ENABLED'] = settings.SWAGGER_UI_ENABLED
+    flask_app.config['RESTFUL_JSON'] = settings.RESTFUL_JSON
 
 def initialize_app(flask_app):
     configure_app(flask_app)
@@ -31,7 +34,9 @@ def initialize_app(flask_app):
     # ADD ENDPOINTS
     api.add_namespace(text_translation_namespace)
     api.add_namespace(text_detection_namespace)
+    api.add_namespace(languages_namespace)
     # END ENDPOINTS
+
 
     flask_app.register_blueprint(blueprint)
 

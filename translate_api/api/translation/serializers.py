@@ -2,8 +2,17 @@ from flask_restplus import fields
 
 from translate_api.api.restplus import api
 
-internal_server_error = api.model('internal_server_error', {
-    'error': fields.String(description='Error description'),
+vnd_error = api.model('api_error', {
+    'message': fields.String(required=True, description='Error description'),
+    'path': fields.String(required=True, description='Field or parameter causing the error'),
+})
+vnd_errors = api.model('api_errors', {
+    'errors': fields.List(fields.Nested(vnd_error, required=True), required=True)
+})
+
+vnd_error_schema = api.model('vnd_error_schema', {
+    'total': fields.Integer(required=True, description='Total errors'),
+    '_embedded': fields.Nested(vnd_errors, required=True)
 })
 
 # ----------------------------
