@@ -37,8 +37,8 @@ class TranslationService:
         translation = translator.translate(text, src=from_language, dest=to_language)
 
         return True, {
-            "text_original": translation.origin,
-            "text_translated": translation.text
+            "original": translation.origin,
+            "translated": translation.text
         }
 
     def _validate_dto(self, dto):

@@ -2,8 +2,19 @@ from flask_restplus import fields
 
 from translate_api.api.restplus import api
 
-detect_text_request = api.model('Detect language from text', {
+internal_server_error = api.model('internal_server_error', {
+    'error': fields.String(description='Error description'),
+})
+
+# ----------------------------
+
+detect_text_request = api.model('detect_text_request', {
     'text': fields.String(description='Text to detect'),
+})
+
+detect_text_response = api.model('detect_text_response', {
+    'language': fields.String(description='Guessed language'),
+    'confidence': fields.Float(description="Degree of confindence")
 })
 
 translated_text_request = api.model('Translate text', {
@@ -13,7 +24,7 @@ translated_text_request = api.model('Translate text', {
 })
 
 translated_text_response = api.model('Translated text', {
-    'text_original': fields.String(description='Original text'),
-    'text_translated': fields.String(description='Translated text'),
+    'original': fields.String(description='Original text'),
+    'translated': fields.String(description='Translated text'),
 
 })

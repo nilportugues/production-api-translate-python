@@ -1,12 +1,15 @@
 import logging.config
 
 from flask import Flask, Blueprint
+from flask_restplus import Swagger
+
 from translate_api import settings
 from translate_api.api.translation.endpoints.translation import ns as text_translation_namespace
 from translate_api.api.translation.endpoints.detection import ns as text_detection_namespace
 from translate_api.api.restplus import api
 
 app = Flask(__name__)
+Swagger(app)
 logging.config.fileConfig('logging.conf')
 log = logging.getLogger(__name__)
 

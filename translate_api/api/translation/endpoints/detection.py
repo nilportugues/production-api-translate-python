@@ -12,10 +12,15 @@ ns = api.namespace('text')
 @ns.route('/detect')
 class LanguageDetectionResource(Resource):
     @api.expect(detect_text_request)
+    @api.response(200, 'Success', detect_text_response)
+    @api.response(500, 'Internal Server Error', internal_server_error)
     def post(self):
         """
         Detects from a given text the language it has been written in.
         """
+        if not request.json:
+            return {'error': 'bad request'}, 400
+
         success, response = DetectionService().execute(request.json)
 
         return response, 200

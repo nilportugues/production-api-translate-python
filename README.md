@@ -8,3 +8,7 @@
 
  - [POST] http://localhost:5000/text/detect/
  - [POST] http://localhost:5000/text/translate/
+ 
+## Documentation
+ 
+- http://flask-restplus.readthedocs.io/en/stable/swagger.html
