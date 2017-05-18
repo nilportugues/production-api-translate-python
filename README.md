@@ -2,6 +2,12 @@
  
 ## 1.1. Development
 
+Meet the requirements: 
+
+```bash
+sudo apt-get install -y python python-pip python-virtualenv nginx gunicorn supervisor
+```
+
 Run the following script to get you started in no time:
 
 ```bash
@@ -13,6 +19,11 @@ This will start the Flask framework listening on `127.0.0.1:8080` .
 ## 1.2. Production
 
 Use the docker container.
+ 
+```
+cd ./
+gunicorn wsgi:application -b :5000
+```
  
 # 2. API 
 
