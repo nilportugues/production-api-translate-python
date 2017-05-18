@@ -8,7 +8,7 @@ Run the following script to get you started in no time:
 chmod +x dev.sh
 ./dev.sh
 ```
-This will start the Flask framework listening on `localhost:5000` .
+This will start the Flask framework listening on `127.0.0.1:8080` .
 
 ## 1.2. Production
 
@@ -22,14 +22,14 @@ Use the docker container.
 
 ## 2.1 Documentation: 
 
- - **Swagger UI**: http://localhost:5000/api/
- - **Swagger.json**: http://localhost:5000/api/swagger.json
+ - **Swagger UI**: http://127.0.0.1:8080/api/
+ - **Swagger.json**: http://127.0.0.1:8080/api/swagger.json
  
 ## 2.2 Methods
 
- - [GET] http://localhost:5000/api/text/languages
- - [POST] http://localhost:5000/api/text/detect
- - [POST] http://localhost:5000/api/text/translate
+ - [GET] http://127.0.0.1:8080/api/text/languages
+ - [POST] http://127.0.0.1:8080/api/text/detect
+ - [POST] http://127.0.0.1:8080/api/text/translate
  
 # 3. Framework:
 

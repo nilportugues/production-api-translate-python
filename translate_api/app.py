@@ -11,10 +11,7 @@ from translate_api.api.restplus import api
 
 app = Flask(__name__)
 Swagger(app)
-logging.config.fileConfig('logging.conf')
 log = logging.getLogger(__name__)
-
-
 
 def configure_app(flask_app):
     flask_app.config['SERVER_NAME'] = settings.FLASK_SERVER_NAME
@@ -23,7 +20,6 @@ def configure_app(flask_app):
     flask_app.config['RESTPLUS_MASK_SWAGGER'] = settings.RESTPLUS_MASK_SWAGGER
     flask_app.config['ERROR_404_HELP'] = settings.RESTPLUS_ERROR_404_HELP
     flask_app.config['SWAGGER_UI_ENABLED'] = settings.SWAGGER_UI_ENABLED
-    flask_app.config['RESTFUL_JSON'] = settings.RESTFUL_JSON
 
 def initialize_app(flask_app):
     configure_app(flask_app)
