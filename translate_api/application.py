@@ -9,7 +9,8 @@ from translate_api.api.translation.endpoints.detection import ns as text_detecti
 from translate_api.api.translation.endpoints.languages import ns as languages_namespace
 from translate_api.api.restplus import api
 
-
+app = Flask(__name__)
+Swagger(app)
 log = logging.getLogger(__name__)
 
 def configure_app(flask_app):
@@ -37,13 +38,11 @@ def initialize_app(flask_app):
 
 
 def create_app():
-    app = Flask(__name__)
-    Swagger(app)
+
     initialize_app(app)
     log.info('>>>>> Starting development server at http://{}/api/ <<<<<'.format(app.config['SERVER_NAME']))
 
     return app
-   # app.run(debug=settings.FLASK_DEBUG, port=5000, host="127.0.0.1")
 
 
 if __name__ == "__main__":

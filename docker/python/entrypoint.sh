@@ -1,7 +1,5 @@
 #!/bin/bash
 
-service supervisor restart
-systemctl enable supervisor
-
-# Run forever.
-tail -f /dev/null
+cd /var/www/
+export PYTHONPATH=/var/www/
+gunicorn wsgi:application -b :5000
