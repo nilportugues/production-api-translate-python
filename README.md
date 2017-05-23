@@ -5,7 +5,7 @@
 Meet the requirements: 
 
 ```bash
-sudo apt-get install -y python python-pip python-virtualenv nginx gunicorn supervisor
+sudo apt-get install -y python python-pip python-virtualenv 
 ```
 
 Run the following script to get you started in no time:
@@ -18,12 +18,15 @@ This will start the Flask framework listening on `127.0.0.1:8080` .
 
 ## 1.2. Production
 
+Generate the build: 
+
+- cd translate_api
+- python setup.py sdist
+- move the resulting tarball to the project's root directory.
+- modify the docker-compose path.
+
 Use the docker container.
  
-```
-cd ./
-gunicorn wsgi:application -b :5000
-```
  
 # 2. API 
 
@@ -46,7 +49,3 @@ gunicorn wsgi:application -b :5000
 
 API has been written in Python (2.7) and uses the Flask-RESTful framework.
  
-**Documentation**: http://flask-restplus.readthedocs.io
-
-## Dockerize it:
-- https://github.com/juanjbrown/flask-nginx-gunicorn-docker-sample

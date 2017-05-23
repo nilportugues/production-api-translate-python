@@ -1,41 +1,18 @@
 version: '2'
 
 services:
-  #--------------------------------------------------
-  # NGINX
-  #--------------------------------------------------
-  translate_api_nginx:
-    container_name: translate_api_nginx
-    build: ./docker/nginx
-    expose:
-      - 80
-    ports:
-      - 8080:80
+  translate_api:
+    build: ./docker
+    container_name: translate_api
     volumes_from:
-      - translate_api_nginx_storage
-    depends_on:
-      - translate_api_python
+      - translate_api_build
+    ports:
+      - "80:80"
+      - "8080:8080"
+      - "5000:5000"
+      - "9191:9191"
 
-  translate_api_nginx_storage:
+  translate_api_build:
     image: tianon/true
     volumes:
-      - ./docker/nginx/server/conf.d/app.conf:/etc/nginx/conf.d/app.conf
-
-
-  #--------------------------------------------------
-  # PYTHON
-  #--------------------------------------------------
-  translate_api_python:
-    container_name: translate_api_python
-    build: ./docker/python
-    expose:
-      - 5000
-    ports:
-      - 5000:5000
-    volumes_from:
-      - translate_api_python_storage
-
-  translate_api_python_storage:
-    image: tianon/true
-    volumes:
-      - ./translate_api:/var/www/translate_api
+      - ./docker/translate_api-0.1.tar.gz:/tmp/build.tar.gz

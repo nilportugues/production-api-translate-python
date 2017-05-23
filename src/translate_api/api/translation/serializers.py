@@ -1,6 +1,6 @@
 from flask_restplus import fields
 
-from translate_api.api.restplus import api
+from api.restplus import api
 
 vnd_error = api.model('api_error', {
     'message': fields.String(required=True, description='Error description'),

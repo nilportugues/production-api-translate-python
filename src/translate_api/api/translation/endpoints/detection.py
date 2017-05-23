@@ -2,12 +2,14 @@ import logging
 
 from flask import request
 from flask_restplus import Resource
-from translate_api.api.translation.serializers import *
-from translate_api.api.restplus import api
-from translate_api.api.translation.services.detect import DetectionService
+
+from ..services.detect import execute
+from ...restplus import api
+from ..serializers import *
 
 log = logging.getLogger(__name__)
 ns = api.namespace('text')
+
 
 @ns.route('/detect')
 class LanguageDetectionResource(Resource):
@@ -21,7 +23,7 @@ class LanguageDetectionResource(Resource):
         if not request.json:
             return self._build_bad_json_response()
 
-        success, response = DetectionService().execute(request.json)
+        success, response = execute(request.json)
 
         return response, 200
 

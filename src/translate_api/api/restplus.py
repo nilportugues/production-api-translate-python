@@ -1,10 +1,10 @@
 import logging
 
 from flask_restplus import Api
+
 from werkzeug.exceptions import BadRequest
 
-from translate_api import settings
-from translate_api.settings import SWAGGER_UI_ENABLED
+from settings import SWAGGER_UI_ENABLED, FLASK_DEBUG
 
 log = logging.getLogger(__name__)
 
@@ -20,7 +20,7 @@ def default_error_handler(e):
     message = 'An unhandled exception occurred.'
     log.exception(message)
 
-    if not settings.FLASK_DEBUG:
+    if not FLASK_DEBUG:
         return {'message': "" + message}, 500
 
 

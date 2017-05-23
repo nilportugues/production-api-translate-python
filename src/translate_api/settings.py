@@ -1,5 +1,6 @@
 # Flask settings
-FLASK_SERVER_NAME = 'localhost:8080'
+# Using 127.0.0.1 is important.
+FLASK_SERVER_NAME = '127.0.0.1:5000'
 FLASK_DEBUG = False
 
 # Flask-Restplus settings
