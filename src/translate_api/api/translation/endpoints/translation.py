@@ -3,7 +3,7 @@ import logging
 from flask import request
 from flask_restplus import Resource
 
-from ..services.detect import execute
+from ..services.translate import TranslationService
 from ...restplus import api
 from ...translation.serializers import *
 
@@ -25,7 +25,8 @@ class TranslationResource(Resource):
         if not request.json:
             return self._build_bad_json_response()
 
-        success, response = execute(request.json)
+        service = TranslationService
+        success, response = service.execute(request.json)
 
         if not success:
             return self._build_bad_request_response(response)
