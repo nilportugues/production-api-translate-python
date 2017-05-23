@@ -1,5 +1,7 @@
 # Flask settings
-# Using 127.0.0.1 is important.
+
+# Using 127.0.0.1 is important if localhost
+# In production it would be intelligent to use the API URL (and no port specified)
 FLASK_SERVER_NAME = '127.0.0.1:5000'
 FLASK_DEBUG = False
 
