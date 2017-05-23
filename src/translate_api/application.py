@@ -28,7 +28,7 @@ app.register_blueprint(blueprint)
 
 # ----------------------------------------------------------------------------
 
-app.config['SERVER_NAME'] = '127.0.0.1:5000'
+app.config['SERVER_NAME'] = settings.FLASK_SERVER_NAME
 app.config['SWAGGER_UI_DOC_EXPANSION'] = settings.RESTPLUS_SWAGGER_UI_DOC_EXPANSION
 app.config['RESTPLUS_VALIDATE'] = settings.RESTPLUS_VALIDATE
 app.config['RESTPLUS_MASK_SWAGGER'] = settings.RESTPLUS_MASK_SWAGGER
