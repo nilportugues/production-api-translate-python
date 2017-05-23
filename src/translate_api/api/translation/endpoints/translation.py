@@ -25,7 +25,7 @@ class TranslationResource(Resource):
         if not request.json:
             return self._build_bad_json_response()
 
-        service = TranslationService
+        service = TranslationService()
         success, response = service.execute(request.json)
 
         if not success:
