@@ -18,14 +18,36 @@ This will start the Flask framework listening on `127.0.0.1:8080` .
 
 ## 1.2. Production
 
-Generate the build: 
+Use the docker container
 
-- cd translate_api
-- python setup.py sdist
-- move the resulting tarball to the project's root directory.
-- modify the docker-compose path.
+### 1.2.1 - Infrastructure Setup
+In order to make it run, we will need to configure nginx and uwsgi and generate the package for the flask application. 
 
-Use the docker container.
+```
+nginx (port 80 or 443) 
+    --> uwsgi (port 8080) 
+        --> your flask application
+```
+
+### 1.2.2 - Creating the build
+
+In order to create a build that we can use anywhere, we need to generate a tarball using `easy_install`'s proxy file `setup.py`. 
+
+```sh
+# Git clone the project
+git clone <git repo>.git example
+ 
+# Generate release tarball
+cd example/
+python setup.py sdist
+
+# save somewhere the build at: 
+./example/dist/flask_app_example-0.1.tar.gz
+```
+
+Move the resulting tarball to the project's root directory and modify the docker-compose path.
+
+Finally use the docker container.
  
  
 # 2. API 
