@@ -9,6 +9,6 @@ cd ..
 cd ..
 
 # save somewhere the build at: 
-mv ./build/src/dist/translate_api-0.1.tar.gz ./
+mv ./build/src/dist/translate_api-0.1.tar.gz ./docker
 
-rm -rf .build
+rm -rf build
